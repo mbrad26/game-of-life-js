@@ -26,9 +26,20 @@ describe('Cell', () => {
 
       expect(cell.state).toEqual(1);
 
-      cell.newState(2);
+      cell.newState(neighbours);
 
       expect(cell.state).toEqual(0);
+    });
+
+    it('lives on with two live neighbours', () => {
+      const neighbours = 2;
+      const cell = new Cell('ALIVE');
+
+      expect(cell.state).toEqual(1);
+
+      cell.newState(neighbours);
+
+      expect(cell.state).toEqual(1);
     });
   });
 });
