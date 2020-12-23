@@ -17,9 +17,9 @@ describe('GameOfLife', () => {
     expect(Cell).toHaveBeenCalledTimes(9);
     expect(game.grid).toEqual(
       [
-        [new Cell(), new Cell(), new Cell()], 
-        [new Cell(), new Cell(), new Cell()], 
-        [new Cell(), new Cell(), new Cell()]
+        [new Cell(''), new Cell(''), new Cell('')], 
+        [new Cell(''), new Cell(''), new Cell('')], 
+        [new Cell(''), new Cell(''), new Cell('')]
       ]
     );
   });
