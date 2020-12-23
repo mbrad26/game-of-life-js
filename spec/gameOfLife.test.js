@@ -1,7 +1,9 @@
 const GameOfLife = require('../lib/gameOfLife');
 const Cell = require('../lib/cell');
 
-jest.mock('../lib/cell');
+jest.mock('../lib/cell', () => {
+  return jest.fn();
+});
 
 describe('GameOfLife', () => {
   it('is defined', () => {
@@ -13,7 +15,7 @@ describe('GameOfLife', () => {
     const game = new GameOfLife(state, Cell);
 
     expect(Cell).toHaveBeenCalledTimes(9);
-    expect(game.grid).toStrictEqual(
+    expect(game.grid).toEqual(
       [
         [new Cell(), new Cell(), new Cell()], 
         [new Cell(), new Cell(), new Cell()], 
