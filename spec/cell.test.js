@@ -11,4 +11,11 @@ describe('Cell', () => {
 
     expect(cell.state).toEqual(0);
   });
+
+  it('can have an alive state', () => {
+    const state = 'ALIVE';
+    const cell = new Cell(state);
+
+    expect(cell.state).toEqual(1);
+  });
 });
