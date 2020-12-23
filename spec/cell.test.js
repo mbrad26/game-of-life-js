@@ -65,5 +65,18 @@ describe('Cell', () => {
 
       expect(cell.state).toEqual(0);
     });
+
+    describe('a dead cell', () => {
+      it('becomes alive with exactly three live neighbours', () => {
+        let neighbours = 3;
+        const cell = new Cell('DEAD');
+
+        expect(cell.state).toEqual(0);
+
+        cell.newState(neighbours);
+
+        expect(cell.state).toEqual(1);
+      });
+    });
   });
 });
