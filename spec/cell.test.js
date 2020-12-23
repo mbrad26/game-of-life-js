@@ -67,9 +67,14 @@ describe('Cell', () => {
     });
 
     describe('a dead cell', () => {
+      let cell;
+
+      beforeEach(() => {
+        cell = new Cell('DEAD');
+      });
+
       it('becomes alive with exactly three live neighbours', () => {
         let neighbours = 3;
-        const cell = new Cell('DEAD');
 
         expect(cell.state).toEqual(0);
 
@@ -80,7 +85,6 @@ describe('Cell', () => {
 
       it('remains dead if there are not exactly three live neighbours', () => {
         let neighbours = 5;
-        const cell = new Cell('DEAD');
 
         expect(cell.state).toEqual(0);
 
