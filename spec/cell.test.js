@@ -77,6 +77,21 @@ describe('Cell', () => {
 
         expect(cell.state).toEqual(1);
       });
+
+      it('remains dead if there are not exactly three live neighbours', () => {
+        let neighbours = 5;
+        const cell = new Cell('DEAD');
+
+        expect(cell.state).toEqual(0);
+
+        cell.newState(neighbours);
+
+        expect(cell.state).toEqual(0);
+
+        neighbours = 2;
+
+        expect(cell.state).toEqual(0);
+      })
     });
   });
 });
