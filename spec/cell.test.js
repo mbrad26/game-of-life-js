@@ -20,9 +20,14 @@ describe('Cell', () => {
   });
 
   describe('newState', () => {
+    let cell;
+
+    beforeEach(() => {
+      cell = new Cell('ALIVE');
+    })
+
     it('dies with less than two live neighbours', () => {
       const neighbours = 1;
-      const cell = new Cell('ALIVE');
 
       expect(cell.state).toEqual(1);
 
@@ -33,7 +38,6 @@ describe('Cell', () => {
 
     it('lives on with two live neighbours', () => {
       const neighbours = 2;
-      const cell = new Cell('ALIVE');
 
       expect(cell.state).toEqual(1);
 
