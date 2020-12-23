@@ -45,5 +45,15 @@ describe('Cell', () => {
 
       expect(cell.state).toEqual(1);
     });
+
+    it('lives on with three live neighbours', () => {
+      const neighbours = 3;
+
+      expect(cell.state).toEqual(1);
+
+      cell.newState(neighbours);
+
+      expect(cell.state).toEqual(1);
+    });
   });
 });
