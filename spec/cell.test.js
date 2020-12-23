@@ -55,5 +55,15 @@ describe('Cell', () => {
 
       expect(cell.state).toEqual(1);
     });
+
+    it('dies with more than three live neighbours', () => {
+      const neighbours = 4;
+
+      expect(cell.state).toEqual(1);
+
+      cell.newState(neighbours);
+
+      expect(cell.state).toEqual(0);
+    });
   });
 });
