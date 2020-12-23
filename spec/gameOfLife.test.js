@@ -10,14 +10,14 @@ describe('GameOfLife', () => {
 
   it('initializes with a nested array representing columns and rows', () => {
     const state = new Array(3).fill(new Array(3).fill(''));
-    const cell = new Cell();
-    const game = new GameOfLife(state, cell);
+    const game = new GameOfLife(state, Cell);
 
+    expect(Cell).toHaveBeenCalledTimes(9);
     expect(game.grid).toStrictEqual(
       [
-        [cell, cell, cell], 
-        [cell, cell, cell], 
-        [cell, cell, cell]
+        [new Cell(), new Cell(), new Cell()], 
+        [new Cell(), new Cell(), new Cell()], 
+        [new Cell(), new Cell(), new Cell()]
       ]
     );
   });
