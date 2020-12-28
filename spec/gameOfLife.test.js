@@ -74,5 +74,14 @@ describe('GameOfLife', () => {
       expect(spy).toHaveBeenCalledTimes(16);
       expect(game.getNeighbours(row, col)).toEqual(1);
     });
+
+    it('returns the correct number of alive neighbours for cell at row 1, col 3', () => {
+      const row = 1;
+      const col = 3;
+      const game = new GameOfLife(grid, spy);
+
+      expect(spy).toHaveBeenCalledTimes(16);
+      expect(game.getNeighbours(row, col)).toEqual(1);
+    });
   });
 });
