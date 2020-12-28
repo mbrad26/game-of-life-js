@@ -28,60 +28,33 @@ describe('GameOfLife', () => {
 
   describe('.getNeighbours', () => {
     let spy;
+    let game;
     const grid = [
       ['', 'ALIVE', '', ''], 
       ['', '', '', 'ALIVE'], 
       ['', '', 'ALIVE', ''],
       ['', 'ALIVE', '', '']
     ];
-
+    
+    const testCases = [
+      {row: 1, col: 1, count: 2},
+      {row: 1, col: 0, count: 1},
+      {row: 0, col: 1, count: 0},
+      {row: 3, col: 1, count: 1},
+      {row: 1, col: 3, count: 1},
+    ];
+    
     beforeEach(() => {
       spy = jest.fn(str => { return { state: str === 'ALIVE' ? 1: 0}});
-    })
+      game = new GameOfLife(grid, spy);
+    });
     
-    it('returns the number of alive neighbours', () => {
-      const row = 1;
-      const col = 1;
-      const game = new GameOfLife(grid, spy);
-      
-      expect(spy).toHaveBeenCalledTimes(16);
-      expect(game.getNeighbours(row, col)).toEqual(2);
-    });
-
-    it('returns the correct number of alive neighbours for cell at row 1, col 0', () => {
-      const row = 1;
-      const col = 0;
-      const game = new GameOfLife(grid, spy);
-
-      expect(spy).toHaveBeenCalledTimes(16);
-      expect(game.getNeighbours(row, col)).toEqual(1);
-    });
-
-    it('returns the correct number of alive neighbours for cell at row 0, col 1', () => {
-      const row = 0;
-      const col = 1;
-      const game = new GameOfLife(grid, spy);
-
-      expect(spy).toHaveBeenCalledTimes(16);
-      expect(game.getNeighbours(row, col)).toEqual(0);
-    });
-
-    it('returns the correct number of alive neighbours for cell at row 3, col 1', () => {
-      const row = 3;
-      const col = 1;
-      const game = new GameOfLife(grid, spy);
-
-      expect(spy).toHaveBeenCalledTimes(16);
-      expect(game.getNeighbours(row, col)).toEqual(1);
-    });
-
-    it('returns the correct number of alive neighbours for cell at row 1, col 3', () => {
-      const row = 1;
-      const col = 3;
-      const game = new GameOfLife(grid, spy);
-
-      expect(spy).toHaveBeenCalledTimes(16);
-      expect(game.getNeighbours(row, col)).toEqual(1);
-    });
+    
+    testCases.forEach(testCase => 
+      it(`returns the number of alive neighbours for cell at row ${testCase.row}, col ${testCase.col}`, () => {
+        expect(spy).toHaveBeenCalledTimes(16);
+        expect(game.getNeighbours(testCase.row, testCase.col)).toEqual(testCase.count);
+      })
+    );
   });
 });
