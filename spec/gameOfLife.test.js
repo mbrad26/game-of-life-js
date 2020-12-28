@@ -37,11 +37,29 @@ describe('GameOfLife', () => {
         ['', 'ALIVE', '', '']
       ];
 
-      const spy = jest.fn(str => { return { state: str === 'ALIVE' ? 1: 0}})
+      const spy = jest.fn(str => { return { state: str === 'ALIVE' ? 1: 0}});
       const game = new GameOfLife(grid, spy);
       
       expect(spy).toHaveBeenCalledTimes(16);
       expect(game.getNeighbours(row, col)).toEqual(2);
+    });
+
+    it('returns the correct number of alive neighbours for cell at row 1, col 0', () => {
+      const row = 1;
+      const col = 0;
+      const grid = [
+        ['', 'ALIVE', '', ''], 
+        ['', '', '', 'ALIVE'], 
+        ['', '', 'ALIVE', ''],
+        ['', 'ALIVE', '', '']
+      ];
+
+      const spy = jest.fn(str => { return { state: str === 'ALIVE' ? 1: 0}});
+      const game = new GameOfLife(grid, spy);
+
+      console.log('COUNT: ', game.grid);
+
+      expect(game.getNeighbours(row, col)).toEqual(1);
     });
   });
 });
