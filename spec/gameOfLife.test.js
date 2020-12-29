@@ -45,6 +45,7 @@ describe('GameOfLife', () => {
       {row: 0, col: 0, count: 1},
       {row: 0, col: 3, count: 1},
       {row: 3, col: 0, count: 1},
+      {row: 3, col: 3, count: 1},
     ];
     
     beforeEach(() => {
