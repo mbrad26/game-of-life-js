@@ -6,14 +6,14 @@ describe('Cell', () => {
   });
 
   it('can have a dead state', () => {
-    const state = 'DEAD';
+    const state = 0;
     const cell = new Cell(state);
 
     expect(cell.state).toEqual(0);
   });
 
   it('can have an alive state', () => {
-    const state = 'ALIVE';
+    const state = 1;
     const cell = new Cell(state);
 
     expect(cell.state).toEqual(1);
@@ -23,7 +23,7 @@ describe('Cell', () => {
     let cell;
 
     beforeEach(() => {
-      cell = new Cell('ALIVE');
+      cell = new Cell(1);
     })
 
     it('dies with less than two live neighbours', () => {
@@ -70,7 +70,7 @@ describe('Cell', () => {
       let cell;
 
       beforeEach(() => {
-        cell = new Cell('DEAD');
+        cell = new Cell(0);
       });
 
       it('becomes alive with exactly three live neighbours', () => {
