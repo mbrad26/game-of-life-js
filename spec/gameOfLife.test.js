@@ -1,7 +1,7 @@
 const GameOfLife = require('../lib/gameOfLife');
 const Cell = require('../lib/cell');
 
-jest.mock('../lib/cell');
+// jest.mock('../lib/cell');
 
 describe('GameOfLife', () => {
   afterEach(() => {
@@ -13,15 +13,15 @@ describe('GameOfLife', () => {
   });
 
   it('initializes with a nested array representing columns and rows', () => {
-    const grid = new Array(3).fill(new Array(3).fill(''));
+    const grid = new Array(3).fill(new Array(3).fill(0));
     const game = new GameOfLife(grid, Cell);
 
-    expect(Cell).toHaveBeenCalledTimes(9);
-    expect(game.grid).toEqual(
+    // expect(Cell).toHaveBeenCalledTimes(9);
+    expect(game.grid).toMatchObject(
       [
-        [new Cell(''), new Cell(''), new Cell('')], 
-        [new Cell(''), new Cell(''), new Cell('')], 
-        [new Cell(''), new Cell(''), new Cell('')]
+        [new Cell(0), new Cell(0), new Cell(0)], 
+        [new Cell(0), new Cell(0), new Cell(0)], 
+        [new Cell(0), new Cell(0), new Cell(0)]
       ]
     );
   });
@@ -30,10 +30,10 @@ describe('GameOfLife', () => {
     let spy;
     let game;
     const grid = [
-      ['', 'ALIVE',      '',      ''], 
-      ['',      '',      '', 'ALIVE'], 
-      ['',      '', 'ALIVE',      ''],
-      ['', 'ALIVE',      '', 'ALIVE']
+      [0, 1, 0, 0], 
+      [0, 0, 0, 1], 
+      [0, 0, 1, 0],
+      [0, 1, 0, 1]
     ];
     
     const testCases = [
@@ -45,13 +45,13 @@ describe('GameOfLife', () => {
       {row: 1, col: 3, count: 1},
       {row: 0, col: 0, count: 1},
       {row: 0, col: 3, count: 1},
-      {row: 2, col: 3, count: 0},
+      {row: 2, col: 3, count: 3},
       {row: 3, col: 0, count: 1},
       {row: 3, col: 3, count: 1},
     ];
     
     beforeEach(() => {
-      spy = jest.fn(str => ({ state: str === 'ALIVE' ? 1: 0}));
+      spy = jest.fn(str => ({ state: str}));
       game = new GameOfLife(grid, spy);
     });
     
@@ -64,22 +64,22 @@ describe('GameOfLife', () => {
     );
   });
 
-  // describe('.newState', () => {
-  //   const grid = [
-  //     ['', 'ALIVE', ''],
-  //     ['', 'ALIVE', ''],
-  //     ['', 'ALIVE', '']
-  //   ];
-  //   const newState = [
-  //     [new Cell(''), new Cell(''), new Cell('')], 
-  //     [new Cell('ALIVE'), new Cell('ALIVE'), new Cell('ALIVE')], 
-  //     [new Cell(''), new Cell(''), new Cell('')]
-  //   ];
-  //   const spy = jest.fn(str => ({ state: str === 'ALIVE' ? 1 : 0}));
-  //   const game = new GameOfLife(grid, spy);
+  describe('.newState', () => {
+    const grid = [
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 0]
+    ];
+    const newState = [
+      [new Cell(0), new Cell(0), new Cell(0)], 
+      [new Cell(1), new Cell(1), new Cell(1)], 
+      [new Cell(0), new Cell(0), new Cell(0)]
+    ];
+    // const spy = jest.fn(str => ({ state: str === 'ALIVE' ? 1 : 0}));
+    const game = new GameOfLife(grid, Cell);
 
-  //   game.newState();
+    game.newState();
 
-  //   expect(game.grid).toEqual(newState);
-  // });
+    expect(game.grid).toEqual(newState);
+  });
 });
