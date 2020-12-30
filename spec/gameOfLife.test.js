@@ -33,7 +33,7 @@ describe('GameOfLife', () => {
       ['', 'ALIVE',      '',      ''], 
       ['',      '',      '', 'ALIVE'], 
       ['',      '', 'ALIVE',      ''],
-      ['', 'ALIVE',      '',      '']
+      ['', 'ALIVE',      '', 'ALIVE']
     ];
     
     const testCases = [
@@ -45,6 +45,7 @@ describe('GameOfLife', () => {
       {row: 1, col: 3, count: 1},
       {row: 0, col: 0, count: 1},
       {row: 0, col: 3, count: 1},
+      {row: 2, col: 3, count: 0},
       {row: 3, col: 0, count: 1},
       {row: 3, col: 3, count: 1},
     ];
