@@ -1,7 +1,7 @@
 const GameOfLife = require('../lib/gameOfLife');
 const Cell = require('../lib/cell');
 
-// jest.mock('../lib/cell');
+jest.mock('../lib/cell');
 
 describe('GameOfLife', () => {
   afterEach(() => {
@@ -16,8 +16,8 @@ describe('GameOfLife', () => {
     const grid = new Array(3).fill(new Array(3).fill(0));
     const game = new GameOfLife(grid, Cell);
 
-    // expect(Cell).toHaveBeenCalledTimes(9);
-    expect(game.grid).toMatchObject(
+    expect(Cell).toHaveBeenCalledTimes(9);
+    expect(game.grid).toEqual(
       [
         [new Cell(0), new Cell(0), new Cell(0)], 
         [new Cell(0), new Cell(0), new Cell(0)], 
@@ -65,21 +65,16 @@ describe('GameOfLife', () => {
   });
 
   describe('.newState', () => {
-    const grid = [
-      [0, 1, 0],
-      [0, 1, 0],
-      [0, 1, 0]
-    ];
-    const newState = [
-      [new Cell(0), new Cell(0), new Cell(0)], 
-      [new Cell(1), new Cell(1), new Cell(1)], 
-      [new Cell(0), new Cell(0), new Cell(0)]
-    ];
-    // const spy = jest.fn(str => ({ state: str === 'ALIVE' ? 1 : 0}));
-    const game = new GameOfLife(grid, Cell);
-
-    game.newState();
-
-    expect(game.grid).toEqual(newState);
+    it('returns the next state for a grid of 1', () => {
+      const grid = [[1]];
+      const spy = jest.fn(str => ({ state: str }));
+      const game = new GameOfLife(grid, spy);
+  
+      expect(game.newState()).toEqual(
+        expect.objectContaining({
+          state: 0,
+        })
+      );
+    })
   });
 });
