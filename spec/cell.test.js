@@ -30,40 +30,28 @@ describe('Cell', () => {
       const neighbours = 1;
 
       expect(cell.state).toEqual(1);
-
-      cell.newState(neighbours);
-
-      expect(cell.state).toEqual(0);
+      expect(cell.newState(neighbours)).toEqual(0);
     });
 
     it('lives on with two live neighbours', () => {
       const neighbours = 2;
 
       expect(cell.state).toEqual(1);
-
-      cell.newState(neighbours);
-
-      expect(cell.state).toEqual(1);
+      expect(cell.newState(neighbours)).toEqual(1);
     });
 
     it('lives on with three live neighbours', () => {
       const neighbours = 3;
 
       expect(cell.state).toEqual(1);
-
-      cell.newState(neighbours);
-
-      expect(cell.state).toEqual(1);
+      expect(cell.newState(neighbours)).toEqual(1);
     });
 
     it('dies with more than three live neighbours', () => {
       const neighbours = 4;
 
       expect(cell.state).toEqual(1);
-
-      cell.newState(neighbours);
-
-      expect(cell.state).toEqual(0);
+      expect(cell.newState(neighbours)).toEqual(0);
     });
 
     describe('a dead cell', () => {
@@ -77,24 +65,18 @@ describe('Cell', () => {
         let neighbours = 3;
 
         expect(cell.state).toEqual(0);
-
-        cell.newState(neighbours);
-
-        expect(cell.state).toEqual(1);
+        expect(cell.newState(neighbours)).toEqual(1);
       });
 
       it('remains dead if there are not exactly three live neighbours', () => {
         let neighbours = 5;
 
         expect(cell.state).toEqual(0);
-
-        cell.newState(neighbours);
-
-        expect(cell.state).toEqual(0);
+        expect(cell.newState(neighbours)).toEqual(0);
 
         neighbours = 2;
 
-        expect(cell.state).toEqual(0);
+        expect(cell.newState(neighbours)).toEqual(0);
       })
     });
   });
