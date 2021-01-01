@@ -51,7 +51,7 @@ describe('GameOfLife', () => {
     ];
     
     beforeEach(() => {
-      spy = jest.fn(str => ({ state: str}));
+      spy = jest.fn(str => ({ state: str }));
       game = new GameOfLife(grid, spy);
     });
     
@@ -67,11 +67,12 @@ describe('GameOfLife', () => {
   describe('.newState', () => {
     it('returns the next state for a grid of 1', () => {
       const grid = [[1]];
+      Cell.mockImplementation(() => ({ state: 0 }));
       const game = new GameOfLife(grid, Cell);
 
-      console.log('GAME: ', game);
+      game.newState();
   
-      expect(game.newState()).toEqual([[new Cell(0)]]);
+      expect(game.grid).toEqual([[new Cell(0)]]);
     })
   });
 });
