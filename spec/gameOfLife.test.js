@@ -67,14 +67,11 @@ describe('GameOfLife', () => {
   describe('.newState', () => {
     it('returns the next state for a grid of 1', () => {
       const grid = [[1]];
-      const spy = jest.fn(str => ({ state: str }));
-      const game = new GameOfLife(grid, spy);
+      const game = new GameOfLife(grid, Cell);
+
+      console.log('GAME: ', game);
   
-      expect(game.newState()).toEqual(
-        expect.objectContaining({
-          state: 0,
-        })
-      );
+      expect(game.newState()).toEqual([[new Cell(0)]]);
     })
   });
 });
