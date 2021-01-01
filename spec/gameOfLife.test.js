@@ -27,7 +27,6 @@ describe('GameOfLife', () => {
   });
 
   describe('.getNeighbours', () => {
-    let spy;
     let game;
     const grid = [
       [0, 1, 0, 0], 
@@ -51,14 +50,14 @@ describe('GameOfLife', () => {
     ];
     
     beforeEach(() => {
-      spy = jest.fn(str => ({ state: str }));
-      game = new GameOfLife(grid, spy);
+      Cell.mockImplementation(str => ({ state: str }));
+      game = new GameOfLife(grid, Cell);
     });
     
     
     testCases.forEach(testCase => 
       it(`returns the number of alive neighbours for cell at row ${testCase.row}, col ${testCase.col}`, () => {
-        expect(spy).toHaveBeenCalledTimes(16);
+        expect(Cell).toHaveBeenCalledTimes(16);
         expect(game.getNeighbours(testCase.row, testCase.col)).toEqual(testCase.count);
       })
     );
@@ -73,6 +72,16 @@ describe('GameOfLife', () => {
       game.newState();
   
       expect(game.grid).toEqual([[new Cell(0)]]);
+    });
+
+    it('returns the next state for a grid of 2', () => {
+      const grid = [[1, 1]];
+      Cell.mockImplementation(str => ({ state: str }));
+      const game = new GameOfLife(grid, Cell);
+
+      game.newState();
+  
+      expect(game.grid).toEqual([[new Cell(0), new Cell(0)]]);
     })
   });
 });
