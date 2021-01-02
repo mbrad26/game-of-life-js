@@ -66,22 +66,32 @@ describe('GameOfLife', () => {
   describe('.newState', () => {
     it('returns the next state for a grid of 1', () => {
       const grid = [[1]];
-      Cell.mockImplementation(() => ({ state: 0 }));
+      Cell.mockImplementation(() => ({ state: 0, nextState: jest.fn(() => 0) }));
       const game = new GameOfLife(grid, Cell);
 
       game.newState();
   
-      expect(game.grid).toEqual([[new Cell(0)]]);
+      expect(game.grid.toString()).toEqual([[new Cell(0)]].toString());
     });
 
     it('returns the next state for a grid of 2', () => {
       const grid = [[1, 1]];
-      Cell.mockImplementation(str => ({ state: str }));
+      Cell.mockImplementation(str => ({ state: str, nextState: jest.fn(() => 0) }));
       const game = new GameOfLife(grid, Cell);
 
       game.newState();
   
-      expect(game.grid).toEqual([[new Cell(0), new Cell(0)]]);
-    })
+      expect(game.grid.toString()).toEqual([[new Cell(0), new Cell(0)]].toString());
+    });
+
+    it('returns the next state for a grid of 4', () => {
+      const grid = [[0, 1], [1, 1]];
+      Cell.mockImplementation(str => ({ state: str, nextState: jest.fn(() => 1) }));
+      const game = new GameOfLife(grid, Cell);
+
+      game.newState();
+  
+      expect(game.grid.toString()).toEqual([[new Cell(1), new Cell(1)], [new Cell(1), new Cell(1)]].toString());
+    });
   });
 });
